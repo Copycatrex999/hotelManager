@@ -138,7 +138,7 @@ class Controlador:
 
         habitacion.ocupar(nombre, noches)
         self.guardar_datos()
-        print(f"\n✅ CHECK-IN EXITOSO: La habitación {num_hab} ahora está ocupada por {nombre}.")
+        print(f"\n CHECK-IN EXITOSO: La habitación {num_hab} ahora está ocupada por {nombre}.")
 
     def hacer_check_out(self):
         # Bucle para asegurar que elija una habitación ocupada correcta
