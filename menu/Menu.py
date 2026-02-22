@@ -4,7 +4,6 @@ from controlador.controller import Controlador
 # CLASE MENU (Interfaz de Usuario)
 # ==========================================
 
-
 class menu:
     """Clase que controla la interfaz de la terminal."""
 
@@ -35,4 +34,4 @@ class menu:
                 print("Saliendo del sistema... ¡Hasta pronto!")
                 break
             else:
-                print("❌ Opción inválida. Por favor teclee un número del 1 al 5.")
+                print(" Opción inválida. Por favor teclee un número del 1 al 5.")

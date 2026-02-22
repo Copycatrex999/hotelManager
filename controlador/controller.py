@@ -1,3 +1,4 @@
+import os
 import json
 
 from habitaciones.HabitacionDeluxe import HabitacionDeluxe
@@ -60,7 +61,7 @@ class Controlador:
 
                     self.habitaciones[numero] = hab
         except (json.JSONDecodeError, AttributeError):
-            print("\n⚠️ ERROR: El archivo de base de datos está corrupto. Restaurando a los valores por defecto...")
+            print("\nERROR: El archivo de base de datos está corrupto. Restaurando a los valores por defecto...")
             self._inicializar_datos(forzar=True)
             self._cargar_datos()  # Reintenta cargar tras reparar
 
@@ -71,24 +72,24 @@ class Controlador:
 
     # Métodos privados de validación
     def _leer_cadena(self, mensaje):
-        """Asegura que el usuario no deje el texto en blanco."""
+        """evita que se deje en blanco"""
         while True:
             texto = input(mensaje).strip()
             if texto:
                 return texto
-            print("❌ Error: Este campo no puede estar vacío.")
+            print("Error: Este campo no puede estar vacío.")
 
     def _leer_entero(self, mensaje, minimo=1):
-        """Asegura que el usuario ingrese un número entero válido."""
+        """para confirmar que se usen solo numeros enteros positivos"""
         while True:
             try:
                 numero = int(input(mensaje).strip())
                 if numero >= minimo:
                     return numero
                 else:
-                    print(f"❌ Error: Debe ingresar un número mayor o igual a {minimo}.")
+                    print(f" Error: Debe ingresar un número mayor o igual a {minimo}.")
             except ValueError:
-                print("❌ Error: Por favor, ingrese un número válido (ejemplo: 2).")
+                print(" Error: Por favor, ingrese un número válido (ejemplo: 2).")
 
     # Métodos públicos
     def mostrar_todas_las_habitaciones(self):
@@ -106,7 +107,7 @@ class Controlador:
                 hay_disponibles = True
 
         if not hay_disponibles:
-            print("❌ No hay habitaciones disponibles.")
+            print("No hay habitaciones disponibles.")
         print("================================")
         return hay_disponibles
 
@@ -119,7 +120,7 @@ class Controlador:
             num_hab = input("\nIngrese el número de la habitación (o 'X' para cancelar): ").strip().upper()
 
             if num_hab == 'X':
-                print("➡️ Operación cancelada. Regresando al menú.")
+                print(" Operación cancelada. Regresando al menú.")
                 return
 
             if num_hab in self.habitaciones:
@@ -127,9 +128,9 @@ class Controlador:
                 if habitacion.esta_disponible():
                     break  # Salimos del bucle si la habitación es válida y libre
                 else:
-                    print("❌ La habitación ya está ocupada. Elija otra.")
+                    print("La habitación ya está ocupada. Elija otra.")
             else:
-                print("❌ Número de habitación incorrecto. Intente de nuevo.")
+                print(" Número de habitación incorrecto. Intente de nuevo.")
 
         # Recopilación de datos validada
         nombre = self._leer_cadena("Ingrese el nombre del huésped: ").title()  # .title() pone mayúsculas (Juan Perez)
@@ -146,7 +147,7 @@ class Controlador:
                 "\nIngrese el número de la habitación para Check-out (o 'X' para cancelar): ").strip().upper()
 
             if num_hab == 'X':
-                print("➡️ Operación cancelada. Regresando al menú.")
+                print("Operación cancelada. Regresando al menú.")
                 return
 
             if num_hab in self.habitaciones:
@@ -154,13 +155,13 @@ class Controlador:
                 if not habitacion.esta_disponible():
                     break  # Salimos del bucle si la habitación es válida y está ocupada
                 else:
-                    print("❌ La habitación está vacía. No hay nadie para hacer Check-out.")
+                    print(" La habitación está vacía. No hay nadie para hacer Check-out.")
             else:
-                print("❌ Número de habitación incorrecto. Intente de nuevo.")
+                print(" Número de habitación incorrecto. Intente de nuevo.")
 
         total = habitacion.calcular_total()
 
-        print("\n🧾 === RECIBO DE CHECK-OUT ===")
+        print("\n === RECIBO DE CHECK-OUT ===")
         print(f"Huésped:   {habitacion.huesped}")
         print(f"Habitación: {habitacion.numero} ({habitacion.tipo})")
         print(f"Estadía:   {habitacion.noches} noches a ${habitacion.precio_noche} c/u")
@@ -170,4 +171,4 @@ class Controlador:
 
         habitacion.liberar()
         self.guardar_datos()
-        print(f"✅ Check-out exitoso. Habitación {num_hab} liberada y datos actualizados.")
+        print(f" Check-out exitoso. Habitación {num_hab} liberada y datos actualizados.")
