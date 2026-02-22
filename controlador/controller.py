@@ -25,8 +25,7 @@ class Controlador:
                 "102": {"tipo": "Deluxe", "precio_noche": 80.0, "estado": "disponible", "huesped": "", "noches": 0},
                 "201": {"tipo": "Ejecutiva", "precio_noche": 120.0, "estado": "disponible", "huesped": "", "noches": 0},
                 "202": {"tipo": "Suite", "precio_noche": 200.0, "estado": "disponible", "huesped": "", "noches": 0},
-                "301": {"tipo": "Presidencial", "precio_noche": 500.0, "estado": "disponible", "huesped": "",
-                        "noches": 0}
+                "301": {"tipo": "Presidencial", "precio_noche": 500.0, "estado": "disponible", "huesped": "","noches": 0}
             }
             with open(self.archivo_json, 'w', encoding='utf-8') as archivo:
                 json.dump(datos_iniciales, archivo, indent=4, ensure_ascii=False)

@@ -1,35 +1,35 @@
 {
     "101": {
-        "tipo": "Sencilla",
+        "tipo": "Standard",
         "precio_noche": 50.0,
         "estado": "disponible",
         "huesped": "",
         "noches": 0
     },
     "102": {
-        "tipo": "Doble",
-        "precio_noche": 80.0,
-        "estado": "disponible",
-        "huesped": "",
-        "noches": 0
-    },
-    "103": {
-        "tipo": "Doble",
+        "tipo": "Deluxe",
         "precio_noche": 80.0,
         "estado": "disponible",
         "huesped": "",
         "noches": 0
     },
     "201": {
-        "tipo": "Suite",
-        "precio_noche": 150.0,
+        "tipo": "Ejecutiva",
+        "precio_noche": 120.0,
         "estado": "disponible",
         "huesped": "",
         "noches": 0
     },
     "202": {
-        "tipo": "Suite Premium",
-        "precio_noche": 250.0,
+        "tipo": "Suite",
+        "precio_noche": 200.0,
+        "estado": "disponible",
+        "huesped": "",
+        "noches": 0
+    },
+    "301": {
+        "tipo": "Presidencial",
+        "precio_noche": 500.0,
         "estado": "disponible",
         "huesped": "",
         "noches": 0
