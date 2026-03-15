@@ -1,0 +1,24 @@
+# .pre-commit-config.yaml
+repos:
+  # 1. El Formateador (Black) - Estandariza espacios, comillas y saltos de línea
+  - repo: https://github.com/psf/black
+    rev: 24.2.0  # Versión estable de Black
+    hooks:
+      - id: black
+        language_version: python3
+
+  # 2. El Linter ultrarrápido (Ruff) - Detecta variables sin usar, errores lógicos y PEP8
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.2
+    hooks:
+      - id: ruff
+        args: [ --fix ] # Intenta arreglar automáticamente lo que pueda
+
+  # 3. El Inspector de Tipado Estático (Mypy) - Obliga a que los 'Type Hints' sean correctos
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.9.0
+    hooks:
+      - id: mypy
+        # Ignora librerías externas que no tengan tipado para no bloquear a los alumnos
+        args: [--ignore-missing-imports]
+

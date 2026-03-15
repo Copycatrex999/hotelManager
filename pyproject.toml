@@ -1,0 +1,48 @@
+# ==========================================
+# 1. CONFIGURACIÓN DE BLACK (El Formateador)
+# ==========================================
+[tool.black]
+# Por defecto Black usa 88 caracteres. 100 les da un poco más de respiro
+# para leer el código en pantallas modernas sin que haga saltos de línea extraños.
+line-length = 100
+target-version = ['py310']
+include = '\.pyi?$'
+
+
+# ==========================================
+# 2. CONFIGURACIÓN DE RUFF (El Linter)
+# ==========================================
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+# Seleccionamos las reglas a evaluar:
+# "E" (Errores de estilo pycodestyle)
+# "F" (Errores lógicos de Pyflakes, ej. variables sin usar)
+# "W" (Advertencias)
+select = ["E", "F", "W"]
+
+# Ignoramos E501 (Línea muy larga) porque Black ya se encarga de formatearlo.
+# Si Ruff y Black pelean por la longitud de la línea, el CI fallará.
+ignore = ["E501"]
+
+
+# ==========================================
+# 3. CONFIGURACIÓN DE MYPY (Tipado Estático)
+# ==========================================
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+
+# MUY IMPORTANTE: Evita que Mypy lance errores si los alumnos usan
+# librerías de terceros (como Flask o Pygame) que no tienen Type Hints.
+ignore_missing_imports = true
+
+# Para el Bloque 2, mantenemos esto en 'false'. Si lo cambias a 'true',
+# el programa fallará si a un alumno se le olvida poner '-> str' o ': int'
+# en CUALQUIER método. (Puedes activarlo al final del cuatrimestre como reto).
+disallow_untyped_defs = false
+
+
