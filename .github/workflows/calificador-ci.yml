@@ -1,0 +1,47 @@
+# .github/workflows/calificador-ci.yml
+name: Calificador Automático (CI)
+
+# Esto le dice a GitHub que ejecute el examen cada vez que hagan 'push'
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  revision-de-codigo:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Paso 1: Clonar el código del alumno en la máquina virtual
+    - name: Descargar repositorio
+      uses: actions/checkout@v4
+
+    # Paso 2: Instalar la versión correcta de Python
+    - name: Configurar Python 3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    # Paso 3: Instalar las herramientas del "policía"
+    - name: Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install black ruff mypy pytest
+        # Si el alumno tiene librerías extra (como Flask o SQLAlchemy), las instala aquí:
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    # Paso 4: Examen de Formato (Black)
+    - name: Examen 1 - Formato Estricto (Black)
+      run: |
+        black --check .
+
+    # Paso 5: Examen de Calidad y PEP8 (Ruff)
+    - name: Examen 2 - Calidad de Código (Ruff)
+      run: |
+        ruff check .
+
+    # Paso 6: Examen de Tipado (Mypy)
+    - name: Examen 3 - Tipado Estricto (Mypy)
+      run: |
+        mypy .
